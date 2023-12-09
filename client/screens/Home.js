@@ -1,11 +1,15 @@
 import React from 'react';
 import { View, Text,StyleSheet } from 'react-native';
+import Layout from '../components/Layout/Layout';
 
 const Home = () => {
   return (
-    <View style={styles.container}>
-      <Text>Home page</Text>
-    </View>
+    <Layout>
+        <View >
+            <Text>Home</Text>
+        </View>
+    </Layout>
+   
   );
 }
 
