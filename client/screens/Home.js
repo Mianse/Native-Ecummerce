@@ -2,11 +2,13 @@ import React from 'react';
 import { View, Text,StyleSheet } from 'react-native';
 import Layout from '../components/Layout/Layout';
 import Categories from '../components/components/Categories';
+import Banner from '../components/components/Banner/Banner';
 
 const Home = () => {
   return (
     <Layout>
         <Categories/>
+        <Banner/>
         <View >
             <Text>Home</Text>
         </View>
