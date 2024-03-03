@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text,TouchableOpacity,StyleSheet ,ScrollView} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/AntDesign';
 import { categoriesData} from '../../data/categoriesData';
 import { useNavigation } from '@react-navigation/native';
 

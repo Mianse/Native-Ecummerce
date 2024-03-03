@@ -3,15 +3,14 @@ import { View, Text,StyleSheet } from 'react-native';
 import Layout from '../components/Layout/Layout';
 import Categories from '../components/components/Categories';
 import Banner from '../components/components/Banner/Banner';
+import Products from '../components/Products/Products';
 
 const Home = () => {
   return (
     <Layout>
         <Categories/>
         <Banner/>
-        <View >
-            <Text>Home</Text>
-        </View>
+        <Products/>
     </Layout>
    
   );
