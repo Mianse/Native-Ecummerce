@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { productsData } from '../../data/productsData';
-import ProductsCard from './ProductsCard';
+import ProductsCard from './productsCard';
 const Products = () => {
   return (
     <View>
