@@ -39,8 +39,8 @@ const ProductDetails = ({ route }) => {
                         <Text style={styles.desc}>Description: {pDetails.description}</Text>
                     </View>
                     <View style={styles.btnContainer}>
-                        <TouchableOpacity style={styles.btnCart}>
-                            <Text style={styles.btnCartText}>ADD TO CART</Text>
+                        <TouchableOpacity style={styles.btnCart} disabled={pDetails.quantity <=0 }>
+                            <Text style={styles.btnCartText}>{pDetails?.quantity > 0 ? "ADD TO CART" :  "OUT OF STOCK"}</Text>
                         </TouchableOpacity>
                         <View style={styles.btnContainer}>
                             <TouchableOpacity style={styles.btnQty} onPress={handleRemoveQty}>

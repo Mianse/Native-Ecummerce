@@ -2,9 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+
 
 const Footer = () => {
   const route  = useRoute();
+  const  navigation = useNavigation()
   return (
     <View style = {styles.container}>
       <TouchableOpacity style = {styles.menuContainer} onPress ={()=>{
@@ -19,11 +22,9 @@ const Footer = () => {
       }}>
         <AntDesign style = {[styles.icon,route === "notification" && styles.active]} name="bells" />
         <Text style={[styles.iconText,route === "notification" && styles.active]}>notifications</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>  
 
-      <TouchableOpacity style = {styles.menuContainer} onPress ={()=>{
-        alert("cart page")
-      }}>
+      <TouchableOpacity style = {styles.menuContainer} onPress ={()=> navigation.navigate('cart')}>
         <AntDesign style = {[styles.icon,route === "cart page" && styles.active]} name="shoppingcart" />
         <Text style={[styles.iconText,route === "cart page" && styles.active]}>cart</Text>
       </TouchableOpacity>
