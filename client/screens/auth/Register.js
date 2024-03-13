@@ -29,12 +29,12 @@ const Register = ({navigation}) => {
 
         <InputBox placeholder={"enter your city"} value={city} setValue={setCity}
         />
-        <InputBox placeholder={"enter your Full names"} value={country} setValue={setCountry}
+        <InputBox placeholder={"enter your Full country"} autoComplete={"country"}   value={country} setValue={setCountry}
         />
 
-        <InputBox placeholder={"enter your address"} value={address} setValue={setAddress}
+        <InputBox placeholder={"enter your address"}  autoComplete={"adress-line1"}  value={address} setValue={setAddress}
         />
-        <InputBox placeholder={"enter your contact"} value={contact} setValue={setContact}
+        <InputBox placeholder={"enter your contact"} autoComplete={"tel"}   value={contact} setValue={setContact}
         />
         <InputBox placeholder={"enter your password"} secureTextEntry={true}  value={password} setValue={setPassword}/>
         <InputBox placeholder={"confirm your password"} secureTextEntry={true}  value={confirmPassword} setValue={setConfirmPassword}/>

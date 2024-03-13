@@ -30,9 +30,7 @@ const Footer = () => {
       </TouchableOpacity>
 
     
-      <TouchableOpacity style = {styles.menuContainer} onPress ={()=>{
-        alert("account page")
-      }}>
+      <TouchableOpacity style = {styles.menuContainer} onPress ={()=>navigation.navigate("account")}>
         <AntDesign style = {[styles.icon,route === "account" && styles.active]} name="user" />
         <Text style={[styles.iconText,route === "account" && styles.active]}>Account</Text>
       </TouchableOpacity>
