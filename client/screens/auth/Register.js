@@ -13,7 +13,7 @@ const Register = ({navigation}) => {
     const [confirmPassword,setConfirmPassword]= useState("")
     const [name,setName] = useState('');
     const handleRegister=()=>{
-        if(!email || !password || !name){
+        if(!email || !password || !name || !address || !city || !contact || !country){
             alert("Please enter name, email or password fields");
         }else{alert("Registered successfully")
         navigation.navigate('login');}

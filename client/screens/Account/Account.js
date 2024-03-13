@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text,Image,StyleSheet, TouchableOpacity } from 'react-native';
-import Layout from '../components/Layout/Layout';
-import { userData } from '../data/userData';
+import Layout from '../../components/Layout/Layout';
+import { userData } from '../../data/userData';
 import AntDesign from "react-native-vector-icons/AntDesign"
 
-const Account = () => {
+const Account = ({navigation}) => {
   return (
     <Layout>
     <View style={styles.container}>
@@ -17,7 +17,7 @@ const Account = () => {
       </View>
       <View style={styles.btnContainer}>
         <Text style={styles.heading}>Account settings</Text>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate("profile",{id: userData._id})}>
             
           <AntDesign style={styles.btnText}  name="edit" />  
         <Text>
@@ -31,7 +31,7 @@ const Account = () => {
            Ny Orders
         </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn}  onPress={()=> navigation.navigate("notification")}>
             
           <AntDesign style={styles.btnText}  name="bells" />  
         <Text>
