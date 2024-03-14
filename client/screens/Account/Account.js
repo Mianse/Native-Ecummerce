@@ -38,7 +38,7 @@ const Account = ({navigation}) => {
             notification
         </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate("adminPanel",{id : userData._id})}>
             
           <AntDesign style={styles.btnText}  name="windows" />  
         <Text>
