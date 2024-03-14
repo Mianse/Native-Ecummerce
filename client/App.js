@@ -13,6 +13,7 @@ import  Register from './screens/auth/Register';
 import Account from './screens/Account/Account';
 import  Notification from "./screens/Account/Notification"
 import Profile from './screens/Account/Profile';
+import MyOrders from './screens/Account/MyOrders';
 //routes
 const stack = createNativeStackNavigator()
 export default function App() {
@@ -29,6 +30,8 @@ export default function App() {
           <stack.Screen name="account" component={Account} />
           <stack.Screen name="notification" component={Notification} />
           <stack.Screen name="profile" component={Profile} />
+          <stack.Screen name="orders" component={MyOrders} />
+
 
           <stack.Screen name="payment" component={Payment} />
           <stack.Screen name="login" options={{headerShown: false}} component={Login} />

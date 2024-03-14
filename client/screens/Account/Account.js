@@ -24,7 +24,7 @@ const Account = ({navigation}) => {
             edit profile
         </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate("orders",{id: userData._id})}>
             
           <AntDesign style={styles.btnText}  name="bars" />  
         <Text>
