@@ -3,6 +3,7 @@ import colors from "colors"
 import morgan from "morgan"
 import cors from "cors"
 import dotenv from "dotenv"
+import testRoute from './routes/testRoute.js';
 
 const app  = express();
 
@@ -11,7 +12,7 @@ const app  = express();
 dotenv.config()
 
 //route
-
+app.use("/api/v1",testRoute)
 app.get('/',(req,res)=>{
     res.status(200).send("<h1>starting node server</h1>")
 })
