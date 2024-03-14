@@ -4,12 +4,15 @@ import morgan from "morgan"
 import cors from "cors"
 import dotenv from "dotenv"
 import testRoute from './routes/testRoute.js';
+import connectDb from "./config/db.js"
 
 const app  = express();
 
 //config
 
 dotenv.config()
+//database connection
+connectDb()
 
 //route
 app.use("/api/v1",testRoute)
