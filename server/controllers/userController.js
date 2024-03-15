@@ -65,11 +65,18 @@ if(!isMatch){
         success:false,
         message: "email or password do not match"
     })
-}else{
-    res.status(200).send({
+}
+    const token = user.generateToken()
+    res.status(200).cookie("token",token,{ 
+    expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+    secure: process.env.NOD_ENV=== "development" ? true:false,
+    httpOnly: process.env.NOD_ENV=== "development" ? true:false,
+    sameSite: process.env.NOD_ENV=== "development" ? true:false,
+
+}).send({
         success: true,
         message: "login successfully",
+        token,
         user
     })
-}
 }

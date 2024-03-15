@@ -5,6 +5,7 @@ import cors from "cors"
 import dotenv from "dotenv"
 import testRoute from './routes/testRoute.js';
 import userRoute from './routes/userRoute.js'
+import cookieParser from "cookie-parser"
 import connectDb from "./config/db.js"
 
 const app  = express();
@@ -17,6 +18,7 @@ app.use(morgan("dev"))
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
 //database connection
 connectDb()
 
@@ -33,5 +35,5 @@ app.get('/',(req,res)=>{
 const PORT = 5000 || process.env.PORT
 
 app.listen(PORT,()=>{
-    console.log(`server is running on ${PORT}`.bgCyan.white)
+    console.log(`server is running on ${PORT} on  ${process.env.NOD_ENV}`.bgCyan.white)
 })
