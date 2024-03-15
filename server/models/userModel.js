@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userModel = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name:{
         type : String,
         required : [true , 'Please provide your name']
@@ -31,5 +31,10 @@ const userModel = new mongoose.Schema({
         type: String,
         required: [true,"Phone is required"], 
         unique: true
-    },
-})
+    },profilePic:{
+        type: String
+    }
+},{timestamps:true});
+
+export const userModel = mongoose.model("Users",userSchema);
+export default userModel
