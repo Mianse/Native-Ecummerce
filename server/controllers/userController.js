@@ -67,7 +67,9 @@ if(!isMatch){
     })
 }
     const token = user.generateToken()
-    res.status(200).cookie("token",token,{ 
+    res
+    .status(200)
+    .cookie("token",token,{ 
     expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
     secure: process.env.NOD_ENV=== "development" ? true:false,
     httpOnly: process.env.NOD_ENV=== "development" ? true:false,
@@ -79,4 +81,45 @@ if(!isMatch){
         token,
         user
     })
+}
+
+export const getUserProfileController = async(req,res)=>{
+    try{
+        const user = await userModel.findById(req.user._id)
+        user.password = undefined
+        res.status(200).send({
+            success:true,
+            message: 'User Info fetched successfully',
+            data:user
+        })
+
+    }catch(error){
+        res.status(500).send({
+            success:false,
+            message: "error in profile api",
+            error:error,
+    })
+}
+}
+
+export const logoutController  =async (req,res)=>{
+try {
+    res
+    .status(200)
+    .cookie("token","",{ 
+    expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+    secure: process.env.NOD_ENV=== "development" ? true:false,
+    httpOnly: process.env.NOD_ENV=== "development" ? true:false,
+    sameSite: process.env.NOD_ENV=== "development" ? true:false,
+
+}).send({
+    success : true ,
+    message:"logged out succesfully"
+})
+} catch (error) {
+   res.status(500).send({
+    success: false,
+    message:"Error In Logging out api" ,
+   }) 
+}
 }
