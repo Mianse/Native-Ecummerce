@@ -38,3 +38,38 @@ export const registerController = async (req, res) => {
         });
     }
 };
+
+export const loginController= async(req,res)=>{
+    const { email, password } = req.body;
+
+    if(!email||!password){
+        return res.status(500).send({
+            success: false,
+            message:"please provide an email and password"
+        })
+}
+
+//check user 
+const user = await  userModel.findOne({ email});
+if (!user) {
+   return res.status(500).send({
+    success: false,
+    message: "User not found"
+   })
+}
+
+//check pass
+const isMatch = await user.comparePassword(password)
+if(!isMatch){
+    res.status(500).send({
+        success:false,
+        message: "email or password do not match"
+    })
+}else{
+    res.status(200).send({
+        success: true,
+        message: "login successfully",
+        user
+    })
+}
+}
