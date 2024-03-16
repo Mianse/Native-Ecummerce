@@ -123,3 +123,67 @@ try {
    }) 
 }
 }
+
+export const updateUserProfileController = async (req,res)=>{
+    try {
+        const user = await userModel.findById(req.user._id)
+        const {name, password, email, address,city , country, phone}=req.body
+        //validation + update
+        if(name) user.name= name;
+        if(password) user.password=password
+        if(email) user.email=email
+        if(address) user.address=address
+        if(city) user.city=city
+        if(country) user.country=country      
+        if(phone) user.phone=phone
+
+//save
+ await user.save();
+
+res.status(200).send({
+    success :true,
+    message:"user profil Updated"
+})
+
+
+    } catch (error) {
+        res.status(500).json({
+        message:" Error in update profile api ",
+        error,
+    })
+    }}
+
+export const updatePasswordController=async (req,res)=> {
+    try {
+        const user = await userModel.findById(req.user._id)
+
+        const {oldPassword,newPassword}= req.body
+                //validation 
+                if(!oldPassword || !newPassword){
+                    res.status(500).send({
+                        success:false,
+                        message: "please provide old password and new password!"
+                    })
+                }
+                //old password check
+                const isMatch = await user.comparePassword(oldPassword)
+                //validation
+                if(!isMatch){
+                    res.status(500).send({
+                        success: false,
+                        message: "old password  invalid"
+                    })
+                }
+                user.password = newPassword
+                await user.save()
+                res.status(200).send({
+                    success:  true,
+                    message: "Password updated successfully",
+                })
+    } catch (error) {
+       res.status(500).send({
+        message: "Error in Update Password API",
+        error:error
+       }) 
+    }
+}
