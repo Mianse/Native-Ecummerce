@@ -1,6 +1,7 @@
 import express from 'express'
-import { registerController,loginController ,getUserProfileController,logoutController,updateUserProfileController,updatePasswordController} from '../controllers/userController.js';
+import { registerController,loginController ,getUserProfileController,logoutController,updateUserProfileController,updatePasswordController,updateProfilePicController} from '../controllers/userController.js';
 import  {isAuth} from '../middlewares/authMiddleware.js';
+import { singleUpload } from '../middlewares/multer.js';
 
 const router = express.Router()
 
@@ -19,5 +20,8 @@ router.put("/profile-update",isAuth,updateUserProfileController)
 
 //update user password
 router.put("/password-update",isAuth,updatePasswordController)
+
+//UPDATE PROFILE PIC
+router.put("/update-picture",isAuth,singleUpload,updateProfilePicController)
 
 export default router;

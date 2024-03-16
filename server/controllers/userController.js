@@ -1,4 +1,8 @@
+import DataURIParser from 'datauri/parser.js';
 import userModel from '../models/userModel.js';
+import  cloudinary from "cloudinary"
+
+import { getDataUri } from '../utils/Feature.js';
 
 export const registerController = async (req, res) => {
     try {
@@ -185,5 +189,36 @@ export const updatePasswordController=async (req,res)=> {
         message: "Error in Update Password API",
         error:error
        }) 
+    }
+}
+//update user profile photo
+
+export const updateProfilePicController = async(req,res)=>{
+    try {
+        const user = await userModel.findById(req.user._id)
+        //get file from client photo
+        const file = getDataUri(req.file)
+        //delete prev image
+       // await cloudinary.v2.uploader.destroy(user.profilePic.public_id)
+
+        //update
+        const cdb = await cloudinary.v2.uploader.upload(file.content)
+        user.profilePic={
+            public_id: cdb.public_id,
+            url: cdb.secure_url
+        }
+
+        //save
+        await user.save()
+        res.status(200).send({
+            success: true,
+            mesaage: "profile pic updated"
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success: false,
+            message: "Server Error! Can't upload the profile image."
+        })
     }
 }
