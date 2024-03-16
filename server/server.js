@@ -8,6 +8,7 @@ import userRoute from './routes/userRoute.js'
 import cookieParser from "cookie-parser"
 import connectDb from "./config/db.js"
 import cloudinary from "cloudinary"
+import productRoute from './routes/productRoute.js'
 
 const app  = express();
 
@@ -33,7 +34,7 @@ cloudinary.v2.config({
 //route
 app.use("/api/v1",testRoute)
 app.use("/api/v1/user",userRoute)
-
+app.use("/api/v1/product",productRoute)
 
 app.get('/',(req,res)=>{
     res.status(200).send("<h1>starting node server</h1>")
