@@ -22,6 +22,6 @@ router.put("/profile-update",isAuth,updateUserProfileController)
 router.put("/password-update",isAuth,updatePasswordController)
 
 //UPDATE PROFILE PIC
-router.put("/update-picture",isAuth,singleUpload,updateProfilePicController)
+router.put("/update-picture",isAuth,updateProfilePicController)
 
 export default router;

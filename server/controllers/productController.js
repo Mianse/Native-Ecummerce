@@ -72,7 +72,8 @@ try {
     })
     res.status(201).send({
         success:  true,
-        message: "product created successfully"
+        message: "product created successfully",
+
     })
 } catch (error) {
     console.log(error)
@@ -82,4 +83,89 @@ try {
         error
     })
 }
+}
+
+
+export const updateProductController= async(req,res) =>{    
+        try {
+            //find product
+            const product = await productModel.findById(req.params.id)
+            //validation
+            if(!product){
+                res.status(500).send({
+                    success: false,
+                    message: "product not available"
+                })
+            }
+            const {name,description,price,stock,category}= req.body;
+            //validate and update
+            if(name) product.name=name;
+            if(description) product.description=description
+            if(price) product.price=price
+            if(stock) product.stock=stock
+            if(category) product.category=category
+            await product.save()
+            res.status(200).send({
+                success:true,
+                message:  'product updated',
+            })
+            
+        } catch (error) {
+           console.log(error) 
+           if(error.name === 'CastError'){
+            return res.status(400).send({
+              success:false,
+              message:'Invalid product ID'
+          })
+        }
+           res.status(500).send({
+            success: false,
+            message: "error in update product api"
+           })
+        }
+}
+
+export const uploadImageController =async(req,res)=>{
+    try {
+        // find product
+        const product = await productModel.findById(req.params.id);
+        //validation 
+        if(!product){
+            res.status(404).send({
+                success: false,
+                message: "product not found"
+            })
+        }
+        if(!req.file){
+            res.status(404).send({
+                success: false,
+                message:  "No file uploaded",
+            })
+        }
+        const file = getDataUri(req.file)
+        const cdb = await cloudinary.v2.uploader.upload(file.content)
+        const image ={
+            public_id: cdb.public_id,
+            url: cdb.secure_url
+        }
+        //save
+        product.images.push(image)
+        await product.save()
+        res.status(200).send({
+            success: true,
+            message:"image updated successfully"
+        })
+    } catch (error) {
+        console.log(error);
+        if(error.name === 'CastError'){
+            return res.status(400).send({
+              success:false,
+              message:'Invalid product ID'
+          })
+        }
+        res.send({
+            success: false,
+            message: "server error when updatind image"
+        })
+    }
 }

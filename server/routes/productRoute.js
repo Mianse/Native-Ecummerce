@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllProductController,getSingleProductController, createProductController} from "../controllers/productController.js";
+import { getAllProductController,getSingleProductController,uploadImageController, createProductController,updateProductController} from "../controllers/productController.js";
 import { isAuth } from "../middlewares/authMiddleware.js";
 import { singleUpload } from "../middlewares/multer.js";
 const router = express.Router()
@@ -10,4 +10,10 @@ router.get("/:id",getSingleProductController)
 
 //create product route
 router.post("/create",isAuth,singleUpload,createProductController)
+
+//update product
+router.put("/:id",isAuth,singleUpload,updateProductController)
+
+//update product image
+router.put("/image/:id",isAuth,singleUpload,uploadImageController)
 export default router
