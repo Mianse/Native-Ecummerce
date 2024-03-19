@@ -31,7 +31,7 @@ router.post("/payments", isAuth, paymetsController);
 router.get("/admin/get-all-orders", isAuth, isAdmin, getAllOrdersController);
 
 // change order status
-router.put("/admin/order/:id", isAuth, isAdmin, changeOrderStatusController);
+router.put("/admin/order/:id", isAuth,  isAdmin,changeOrderStatusController);
 
 // ====================================================================
 
