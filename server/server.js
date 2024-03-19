@@ -2,6 +2,8 @@ import express from "express"
 import colors from "colors"
 import morgan from "morgan"
 import cors from "cors"
+import Stripe from "stripe";
+
 import dotenv from "dotenv"
 import testRoute from './routes/testRoute.js';
 import userRoute from './routes/userRoute.js'
@@ -17,7 +19,8 @@ const app  = express();
 //config
 
 dotenv.config()
-
+//stripe configuration
+export const stripe = new Stripe(process.env.STRIPE_API_SECRET);
 //middlewares
 app.use(morgan("dev"))
 app.use(express.json())
