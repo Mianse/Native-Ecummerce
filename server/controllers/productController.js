@@ -226,7 +226,7 @@ export const deleteProductController =async(req,res)=>{
         if(!product){
             res.status(404).send({
                 success:  false,
-                message:"product doesnot exist"
+                message:"product does not exist"
             })
         }
         //ifnd and delete image cloudinary

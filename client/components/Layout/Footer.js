@@ -10,9 +10,7 @@ const Footer = () => {
   const  navigation = useNavigation()
   return (
     <View style = {styles.container}>
-      <TouchableOpacity style = {styles.menuContainer} onPress ={()=>{
-        alert("home")
-      }}>
+      <TouchableOpacity style = {styles.menuContainer} onPress ={()=>navigation.navigate("Home")}>
         <AntDesign style = {[styles.icon,route === "name" && styles.active]} name="home" />
         <Text style={[styles.iconText,route === "name" && styles.active]}>Home</Text>
       </TouchableOpacity>
