@@ -13,5 +13,5 @@ router.get("/get-categories",getCategoryController)
 router.delete("/delete/:id",deleteCategoryController)
 
 // UPDATE ALL CATEGORY
-router.put("/update/:id", isAuth,  updateCategoryController);
+router.put("/update/:id", isAuth, isAdmin, updateCategoryController);
 export default router
