@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerController,loginController ,getUserProfileController,logoutController,updateUserProfileController,updatePasswordController,updateProfilePicController} from '../controllers/userController.js';
+import { registerController,loginController ,getUserProfileController,logoutController,passwordResetController,updateUserProfileController,updatePasswordController,updateProfilePicController} from '../controllers/userController.js';
 import  {isAuth} from '../middlewares/authMiddleware.js';
 import { singleUpload } from '../middlewares/multer.js';
 
@@ -23,5 +23,8 @@ router.put("/password-update",isAuth,updatePasswordController)
 
 //UPDATE PROFILE PIC
 router.put("/update-picture",isAuth,updateProfilePicController)
+// FORGOT PASSWORD
+router.post("/reset-password", passwordResetController);
+
 
 export default router;

@@ -40,11 +40,15 @@ const userSchema = new mongoose.Schema({
         url: {
             type:String
         },
-        role: {
-          type: String,
-          default: "user",
-        },
-    }
+        
+        
+    }, answer: {
+        type: String,
+        required: [true, "answer is required"],
+      },role: {
+        type: String,
+        default: "user",
+      },
 },{timestamps:true});
 
 //hash funtion
