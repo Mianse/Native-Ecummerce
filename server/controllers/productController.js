@@ -169,3 +169,87 @@ export const uploadImageController =async(req,res)=>{
         })
     }
 }
+
+export const deleteProductImageController = async(req,res)=>{
+    try {
+        const product = await productModel.findById(req.params.id)
+        //validation
+        if(!product){
+            res.status(404).send({
+                success: false,
+                message: "product not available"
+            })
+        }
+//image id find
+const id = req.query.id
+if(!id){
+    res.status(404).send({
+        success: false,
+        message: "image not found "
+    })
+}
+let isExist = -1;
+product.images.forEach((item ,index)=>{
+if(item._id.toString() === id.toString()) isExist = index
+})
+if(isExist < 0){
+    res.status(404).send({
+        success: false,
+        message: "image not found"
+    })
+}
+//delete product image
+await cloudinary.v2.uploader.destroy(product.images[isExist].public_id)
+product.images.splice(isExist,1)
+return res.status(200).send({
+    success : true,
+    message:'product image deleted successfully'
+})
+}catch(error) {
+       console.log(error)
+       if(error.name === 'CastError'){
+        return res.status(404).send({
+          success:false,
+          message:'Invalid product ID'
+      })
+    }
+       res.status(500).send({
+        success: false,
+        message: "error in delete product api"
+
+       })
+    }
+}
+export const deleteProductController =async(req,res)=>{
+    try {
+        const product = await productModel.findById(req.params.id)
+        if(!product){
+            res.status(404).send({
+                success:  false,
+                message:"product doesnot exist"
+            })
+        }
+        //ifnd and delete image cloudinary
+        for(let index = 0; index <  product.images.length; index++){
+        await cloudinary.v2.uploader.destroy(product.images[index].public_id)
+        }
+        await product.deleteOne()
+        res.status(200).send({
+            success: false,
+            messsage: "product deleted succussfully"
+        })
+    } catch (error) {
+        console.log(error)
+       if(error.name === 'CastError'){
+        return res.status(404).send({
+          success:false,
+          message:'Invalid product ID'
+      })
+    }
+       res.status(500).send({
+        success: false,
+        message: "error in delete product api"
+
+       })
+    }
+}

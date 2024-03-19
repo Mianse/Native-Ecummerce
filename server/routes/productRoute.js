@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllProductController,getSingleProductController,uploadImageController, createProductController,updateProductController} from "../controllers/productController.js";
+import { getAllProductController,getSingleProductController,deleteProductController,deleteProductImageController,uploadImageController, createProductController,updateProductController} from "../controllers/productController.js";
 import { isAuth } from "../middlewares/authMiddleware.js";
 import { singleUpload } from "../middlewares/multer.js";
 const router = express.Router()
@@ -16,4 +16,10 @@ router.put("/:id",isAuth,singleUpload,updateProductController)
 
 //update product image
 router.put("/image/:id",isAuth,singleUpload,uploadImageController)
+
+//delete product image
+router.delete("/delete-productimage/:id",isAuth,deleteProductImageController)
+
+//delete product 
+router.delete("/delete/:id",isAuth,deleteProductController)
 export default router
