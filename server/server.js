@@ -3,7 +3,7 @@ import colors from "colors"
 import morgan from "morgan"
 import cors from "cors"
 import Stripe from "stripe";
-
+import helmet from "helmet"
 import dotenv from "dotenv"
 import testRoute from './routes/testRoute.js';
 import userRoute from './routes/userRoute.js'
@@ -13,6 +13,7 @@ import cloudinary from "cloudinary"
 import productRoute from './routes/productRoute.js'
 import categoryRoute from './routes/categoryRoute.js'
 import orderRoutes from './routes/orderRoutes.js'
+import mongoSanitize from "express-mongo-sanitize";
 
 const app  = express();
 
@@ -22,6 +23,8 @@ dotenv.config()
 //stripe configuration
 export const stripe = new Stripe(process.env.STRIPE_API_SECRET);
 //middlewares
+app.use(mongoSanitize())
+app.use(helmet())
 app.use(morgan("dev"))
 app.use(express.json())
 app.use(cors())
