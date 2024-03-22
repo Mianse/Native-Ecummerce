@@ -1,51 +1,45 @@
 import mongoose from "mongoose";
 
-// REVIEW MODAL
+// REVIEW MODEL
 const reviewSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "name is require"],
+      required: [true, "Name is required"],
     },
     rating: {
       type: Number,
       default: 0,
     },
-    comment: {
-      type: String,
-    },
+    comment: String,
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Users",
-      required: [true, "user require"],
+      ref: "User",
+      required: [true, "User is required"],
     },
   },
   { timestamps: true }
 );
 
-// PROCUCT MODAL
+// PRODUCT MODEL
 const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "product name is required"],
+      required: [true, "Product name is required"],
     },
     description: {
       type: String,
-      required: [true, "produvct description is required"],
+      required: [true, "Product description is required"],
     },
     price: {
       type: Number,
-      required: [true, "product price is required"],
+      required: [true, "Product price is required"],
     },
     stock: {
       type: Number,
-      required: [true, "product stock required"],
+      required: [true, "Product stock is required"],
     },
-    // quantity: {
-    //   type: Number,
-    //   required: [true, "product quantity required"],
-    // },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
@@ -69,5 +63,5 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const productModel = mongoose.model("Products", productSchema);
-export default productModel;
+const Product = mongoose.model("Product", productSchema);
+export default Product;
