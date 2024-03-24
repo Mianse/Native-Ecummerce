@@ -1,18 +1,41 @@
-import React ,{useState}from 'react';
+import React ,{useState,useEffect}from 'react';
 import { View, Text, TextInput,TouchableOpacity ,StyleSheet,Image} from 'react-native';
 import InputBox from '../../components/components/Form/inputBox';
+import { useDispatch,useSelector } from 'react-redux';
+import { login } from '../../redux/features/auth/userActions';
+
 const Login = ({navigation}) => {
     const loginImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZHLPdX_mVDYXuBQRYMV42yNkUQaZ_gE8o5Q&usqp=CAU"
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState('')
+    //HOOKS
+    const dispatch = useDispatch()
+
+    //global state
+    const {loading,error,message} = useSelector((state) => state.user)
     //login
     const handleLogin=()=>{
         if(!email || !password){
             alert("Please enter email or password fields");
-        }else{alert("login successfully")
-        navigation.navigate('Home');}
+        }
+        dispatch(login(email,password))
+        //else{alert("login successfully")
+        navigation.navigate('Home');
+        
     }
+  
+    useEffect(()=>{
+      if(error){
+        alert(error)
+        dispatch({type:'clearError'})
+      }
+      if(message){
+        alert(message)
+        dispatch({type:'clearMessage'})
+
+      }
+    },[error,message,dispatch])
   return (
     <View style={styles.container}>
         <Image source = {{uri:loginImage}} style= {styles.image}/>
@@ -30,8 +53,8 @@ const Login = ({navigation}) => {
         </View>
       
     </View>
-  );
-}
+  )
+  }
 
 const styles = StyleSheet.create({
    container:{
